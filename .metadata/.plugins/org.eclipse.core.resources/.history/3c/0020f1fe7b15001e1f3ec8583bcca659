@@ -1,0 +1,14 @@
+package estore;
+
+public class Parent {
+	
+	int pid = 100;
+	
+	
+	public void m1() {
+		
+		System.out.println("m1() from Parent");
+		
+	}
+
+}

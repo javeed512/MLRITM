@@ -1,0 +1,30 @@
+package estore;
+
+public class Product  extends Object{
+	
+	private int productId;
+	private String productName;
+	private double price;
+	
+	
+	
+	public Product() {
+		super();
+		System.out.println("Product object created..");
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+	Product	product1 = new Product();
+	
+		System.out.println(product1);
+		
+		
+	}
+	
+
+}

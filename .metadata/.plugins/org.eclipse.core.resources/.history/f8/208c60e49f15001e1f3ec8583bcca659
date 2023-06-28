@@ -1,0 +1,20 @@
+package com.hdfc;
+
+public class Bank1 implements IBank{
+
+	@Override
+	public void deposit() {
+		System.out.println("Deposit done");
+		
+	}
+
+	@Override
+	public void withdraw() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+}

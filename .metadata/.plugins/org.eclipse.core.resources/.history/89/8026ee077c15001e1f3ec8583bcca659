@@ -1,0 +1,19 @@
+package estore;
+
+public class Parent extends  Object{
+	
+	int pid = 100;
+	
+	pubic Parent() {
+		
+		System.out.println("Parent class object created..");
+		
+	}
+	
+	public void m1() {
+		
+		System.out.println("m1() from Parent");
+		
+	}
+
+}

@@ -1,0 +1,59 @@
+package com.mlr;
+
+import java.util.Scanner;
+
+public class AtmDemo {
+
+	public static void main(String[] args) {
+
+		boolean flag = true;
+
+		do {
+
+			System.out.println("***Welcome to ATM****");
+			System.out.println("1. Deposit");
+			System.out.println("2. Withdraw");
+			System.out.println("3. Check Balance");
+			System.out.println("4. Exit/Logout");
+
+			Scanner scanner = new Scanner(System.in);
+
+			int choice = scanner.nextInt();
+
+			switch (choice) {
+			case 1:
+
+				System.out.println("Deposit Successfully done..");
+
+				break;
+
+			case 2:
+
+				System.out.println("Withdraw Successfully done..");
+
+				break;
+
+			case 3:
+				System.out.println("Your Balance is Rs. 50000 ");
+
+				break;
+			case 4:
+
+				flag = false;
+				
+				System.out.println("Thank you visit again..");
+				
+				break;
+
+			default:
+				
+				System.err.println("Sorry ! Invalid option");
+				
+				break;
+			}
+
+		} while (flag);
+
+	}
+
+}
