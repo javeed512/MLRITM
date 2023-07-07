@@ -1,0 +1,799 @@
+SQL:
+Structural Query Language , it is used to interact with any  Database System.
+
+Datatypes: Integer,Double, Char , Varchar,Date ....
+
+DDL:
+====
+CREATE , ALTER , DROP,TRUNCATE
+
+Creating Database:
+--------------------------
+CREATE   DATABASE  mlr_db;
+
+Connect to DB
+---------------------
+use  Database_Name;
+
+
+show databases;  // it shows all available databases
+show tables;  // shows all available tables
+
+
+Create Table:
+------------------
+
+CREATE   TABLE  Employee(
+   Eid INTEGER(3)  Primary Key ,   
+   EName   VARCHAR(20) ,
+   Salary    Double ,
+   Comm    Double , 
+  Job     Varchar(20),
+   DOJ     Date ,
+   Mid     INTEGER(3)
+     );
+INSERT INTO  Employee    Values(101,'King',50000,null,'President','2001-06-12',null);
+
+INSERT INTO  Employee    Values(102,'Scott',35000,null,'Manager','2002-09-23',101);
+INSERT INTO  Employee    Values(103,'Ford',30000,null,'Manager','2002-12-01',101);
+
+
+INSERT INTO  Employee    Values(104,'Smith',25000,1000,'Developer','2005-07-14',102);
+INSERT INTO  Employee    Values(105,'Tom',24000,2000,'Developer','2005-09-21',102);
+
+INSERT INTO  Employee    Values(106,'Adam',22000,3000,'Tester', Current_Date ,103);
+INSERT INTO  Employee    Values(107,'Jerry',21000,4000,'Tester', Current_Date-1 ,103);
+
+INSERT INTO  Employee Values(108,'Raju',40000,null,'Analyst',current_date,101);
+
+
+
+CREATE TABLE  DEPT(DNO INT(3)  Primary Key , DNAME varchar(20),Location varchar(20));
+
+
+
+
+DROP:
+---------
+DROP Table Table_Name;
+
+TRUNCATE
+----------------:
+TRUNCATE TABLE  Table_Name;
+
+
+
+ALTER :
+----------
+ADD, MODIFY , DROP
+
+
+ALTER  TABLE  Employee  ADD  DNO Integer(3);
+
+ALTER  TABLE Employee  MODIFY EName VARCHAR(25);
+
+
+ALTER  TABLE Employee  DROP  Column  DNO;
+
+
+
+
+
+
+DML:
+-------
+INSERT , UPDATE , DELETE
+
+UPDATE Employee SET  Comm = 1500  where  eid = 103;
+
+DELETE  FROM  Employee  eid = 103;
+
+
+DQL/DRL:
+-------------
+
+SELECT   eid,ename,salary,job  from Employee;
+
+
+mysql> desc employee;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Eid    | int         | NO   | PRI | NULL    |       |
+| EName  | varchar(25) | YES  |     | NULL    |       |
+| Salary | double      | YES  |     | NULL    |       |
+| Comm   | double      | YES  |     | NULL    |       |
+| Job    | varchar(20) | YES  |     | NULL    |       |
+| DOJ    | date        | YES  |     | NULL    |       |
+| Mid    | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | NULL | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> UPDATE Employee SET  Comm = 1500  where  eid = 103;
+Query OK, 1 row affected (0.13 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT   eid,ename,salary,job  from Employee;
++-----+-------+--------+-----------+
+| eid | ename | salary | job       |
++-----+-------+--------+-----------+
+| 101 | King  |  50000 | President |
+| 102 | Scott |  35000 | Manager   |
+| 103 | Ford  |  30000 | Manager   |
+| 104 | Smith |  25000 | Developer |
+| 105 | Tom   |  24000 | Developer |
+| 106 | Adam  |  22000 | Tester    |
+| 107 | Jerry |  21000 | Tester    |
+| 108 | Raju  |  40000 | Analyst   |
++-----+-------+--------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT   eid,ename,salary,job  from Employee where  job = 'Manager';
++-----+-------+--------+---------+
+| eid | ename | salary | job     |
++-----+-------+--------+---------+
+| 102 | Scott |  35000 | Manager |
+| 103 | Ford  |  30000 | Manager |
++-----+-------+--------+---------+
+2 rows in set (0.04 sec)
+
+mysql> SELECT   eid,ename,salary,job  from Employee where  job != 'Manager';
++-----+-------+--------+-----------+
+| eid | ename | salary | job       |
++-----+-------+--------+-----------+
+| 101 | King  |  50000 | President |
+| 104 | Smith |  25000 | Developer |
+| 105 | Tom   |  24000 | Developer |
+| 106 | Adam  |  22000 | Tester    |
+| 107 | Jerry |  21000 | Tester    |
+| 108 | Raju  |  40000 | Analyst   |
++-----+-------+--------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT   * from employee  where salary > 20000;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.02 sec)
+
+mysql> SELECT   * from employee  where salary > 30000;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT   eid,ename,salary,job  from Employee where  job = 'Manager' AND salary > 30000;
++-----+-------+--------+---------+
+| eid | ename | salary | job     |
++-----+-------+--------+---------+
+| 102 | Scott |  35000 | Manager |
++-----+-------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where  IN('Manager','Developer','Tester');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN('Manager','Developer','Tester')' at line 1
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee where  JOB   IN('Manager','Developer','Tester');
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
++-----+-------+--------+------+-----------+------------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where  SALARY  =ANY (25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  =ANY(25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  ANY(25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ANY(25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  =SOME(25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  =ANY(25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  IN(25000,30000,35000);
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
++-----+-------+--------+------+-----------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where  SALARY  =ANY(25000,30000,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000,30000,35000)' at line 1
+mysql> select * from employee where  SALARY  IN(25000,30000,35000);
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
++-----+-------+--------+------+-----------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee where comm = null;
+Empty set (0.00 sec)
+
+mysql> select * from employee where comm  is  null;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employee where comm  is not  null;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
++-----+-------+--------+------+-----------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee   where  ename  LIKE  'S%';
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
++-----+-------+--------+------+-----------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee   where  ename  LIKE  '%m';
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
++-----+-------+--------+------+-----------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee   where  doj  LIKE  '%07%';
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee   where  ename  LIKE  'T';
+Empty set (0.00 sec)
+
+mysql> select * from employee   where  ename  LIKE  'T_m';
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
++-----+-------+--------+------+-----------+------------+------+
+1 row in set (0.00 sec)
+
+
+
+GROUP FUNCTIONS/ AGGREGATE FUNCTIONS:
+=========================================
+MIN,MAX,SUM,AVG,COUNT
+
+
+
+mysql> select  min(salary) from  employee;
++-------------+
+| min(salary) |
++-------------+
+|       21000 |
++-------------+
+1 row in set (0.04 sec)
+
+mysql> select  max(salary) from  employee;
++-------------+
+| max(salary) |
++-------------+
+|       50000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from employee;
++------------+
+| min(doj)   |
++------------+
+| 2001-06-12 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(doj) from employee;
++------------+
+| max(doj)   |
++------------+
+| 2023-07-07 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(ename) from employee;
++------------+
+| min(ename) |
++------------+
+| Adam       |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select SUM(salary) from employee;
++-------------+
+| SUM(salary) |
++-------------+
+|      247000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select avg(salary) from employee;
++-------------+
+| avg(salary) |
++-------------+
+|       30875 |
++-------------+
+1 row in set (0.03 sec)
+
+mysql> select count(*) from employee;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select count(comm)  from employee;
++-------------+
+| count(comm) |
++-------------+
+|           5 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select  salary+comm  , ename  from employee;
++-------------+-------+
+| salary+comm | ename |
++-------------+-------+
+|        NULL | King  |
+|        NULL | Scott |
+|       31500 | Ford  |
+|       26000 | Smith |
+|       26000 | Tom   |
+|       25000 | Adam  |
+|       25000 | Jerry |
+|        NULL | Raju  |
++-------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select  salary+comm  Total , ename  from employee;
++-------+-------+
+| Total | ename |
++-------+-------+
+|  NULL | King  |
+|  NULL | Scott |
+| 31500 | Ford  |
+| 26000 | Smith |
+| 26000 | Tom   |
+| 25000 | Adam  |
+| 25000 | Jerry |
+|  NULL | Raju  |
++-------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select  salary+comm as Total , ename  from employee;
++-------+-------+
+| Total | ename |
++-------+-------+
+|  NULL | King  |
+|  NULL | Scott |
+| 31500 | Ford  |
+| 26000 | Smith |
+| 26000 | Tom   |
+| 25000 | Adam  |
+| 25000 | Jerry |
+|  NULL | Raju  |
++-------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select  salary+NULLIF(comm,0) as Total , ename  from employee;
++-------+-------+
+| Total | ename |
++-------+-------+
+|  NULL | King  |
+|  NULL | Scott |
+| 31500 | Ford  |
+| 26000 | Smith |
+| 26000 | Tom   |
+| 25000 | Adam  |
+| 25000 | Jerry |
+|  NULL | Raju  |
++-------+-------+
+8 rows in set (0.04 sec)
+
+mysql> select  salary+IFNULL(comm,0) as Total , ename  from employee;
++-------+-------+
+| Total | ename |
++-------+-------+
+| 50000 | King  |
+| 35000 | Scott |
+| 31500 | Ford  |
+| 26000 | Smith |
+| 26000 | Tom   |
+| 25000 | Adam  |
+| 25000 | Jerry |
+| 40000 | Raju  |
++-------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select  ename,salary,ifnull(comm,0) from employee;
++-------+--------+----------------+
+| ename | salary | ifnull(comm,0) |
++-------+--------+----------------+
+| King  |  50000 |              0 |
+| Scott |  35000 |              0 |
+| Ford  |  30000 |           1500 |
+| Smith |  25000 |           1000 |
+| Tom   |  24000 |           2000 |
+| Adam  |  22000 |           3000 |
+| Jerry |  21000 |           4000 |
+| Raju  |  40000 |              0 |
++-------+--------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from employee order by ename asc;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.05 sec)
+
+mysql> select * from employee order by salary asc;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee  group by job;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'mlr_db.employee.Eid' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select  job from employee  group by job;
++-----------+
+| job       |
++-----------+
+| President |
+| Manager   |
+| Developer |
+| Tester    |
+| Analyst   |
++-----------+
+5 rows in set (0.02 sec)
+
+mysql> select comm  from employee  group by comm;
++------+
+| comm |
++------+
+| NULL |
+| 1500 |
+| 1000 |
+| 2000 |
+| 3000 |
+| 4000 |
++------+
+6 rows in set (0.00 sec)
+
+mysql> select  sum(salary) from employee group by job;
++-------------+
+| sum(salary) |
++-------------+
+|       50000 |
+|       65000 |
+|       49000 |
+|       43000 |
+|       40000 |
++-------------+
+5 rows in set (0.03 sec)
+
+mysql> select  job ,  sum(salary) from employee group by job;
++-----------+-------------+
+| job       | sum(salary) |
++-----------+-------------+
+| President |       50000 |
+| Manager   |       65000 |
+| Developer |       49000 |
+| Tester    |       43000 |
+| Analyst   |       40000 |
++-----------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select ename, job ,  sum(salary) from employee group by job;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'mlr_db.employee.EName' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select  job ,  sum(salary) from employee  where sum(salary) > 45000 group by job;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> select * from employee;
++-----+-------+--------+------+-----------+------------+------+
+| Eid | EName | Salary | Comm | Job       | DOJ        | Mid  |
++-----+-------+--------+------+-----------+------------+------+
+| 101 | King  |  50000 | NULL | President | 2001-06-12 | NULL |
+| 102 | Scott |  35000 | NULL | Manager   | 2002-09-23 |  101 |
+| 103 | Ford  |  30000 | 1500 | Manager   | 2002-12-01 |  101 |
+| 104 | Smith |  25000 | 1000 | Developer | 2005-07-14 |  102 |
+| 105 | Tom   |  24000 | 2000 | Developer | 2005-09-21 |  102 |
+| 106 | Adam  |  22000 | 3000 | Tester    | 2023-07-07 |  103 |
+| 107 | Jerry |  21000 | 4000 | Tester    | 2023-07-06 |  103 |
+| 108 | Raju  |  40000 | NULL | Analyst   | 2023-07-07 |  101 |
++-----+-------+--------+------+-----------+------------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee group by job;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'mlr_db.employee.Eid' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select job from employee group by job;
++-----------+
+| job       |
++-----------+
+| President |
+| Manager   |
+| Developer |
+| Tester    |
+| Analyst   |
++-----------+
+5 rows in set (0.00 sec)
+
+mysql> select job from employee group by job having sum(salary) > 45000;
++-----------+
+| job       |
++-----------+
+| President |
+| Manager   |
+| Developer |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select job,salary from employee group by job having sum(salary) > 45000;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'mlr_db.employee.Salary' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select job,salary from employee group by job,salary having sum(salary) > 45000;
++-----------+--------+
+| job       | salary |
++-----------+--------+
+| President |  50000 |
++-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select job,sum(salary) from employee group by job having sum(salary) > 45000;
++-----------+-------------+
+| job       | sum(salary) |
++-----------+-------------+
+| President |       50000 |
+| Manager   |       65000 |
+| Developer |       49000 |
++-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select job,sum(salary) from employee group by job having sum(salary) > 45000 order by job asc;
++-----------+-------------+
+| job       | sum(salary) |
++-----------+-------------+
+| Developer |       49000 |
+| Manager   |       65000 |
+| President |       50000 |
++-----------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> select job,sum(salary) from employee where job IN('Developer','Manager') group by job having sum(salary) > 45000 order by job asc;
++-----------+-------------+
+| job       | sum(salary) |
++-----------+-------------+
+| Developer |       49000 |
+| Manager   |       65000 |
++-----------+-------------+
+2 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
