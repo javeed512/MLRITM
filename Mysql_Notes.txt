@@ -750,6 +750,108 @@ mysql> select job,sum(salary) from employee where job IN('Developer','Manager') 
 2 rows in set (0.00 sec)
 
 
+ADD Foreign key Column in Employee table.
+
+ALTER TABLE Employee  Add DNO  INT(3)  reference  Dept(DNO);
+
+
+
+JOINS:
+----------
+
+When we want fetch data from multiple tables we can use joins
+
+1.Equi Join
+2.Non-Equi Join
+3. Cross Join
+4. Natural Join
+5. Outer Joins
+6. Self Join
+
+
+Equi Join
+--------------
+mysql> select eid,ename,salary,job,d.dno,dname,location from dept d,employee e  where d.dno = e.dno;
++-----+-------+--------+-----------+-----+-------------+-----------+
+| eid | ename | salary | job       | dno | dname       | location  |
++-----+-------+--------+-----------+-----+-------------+-----------+
+| 101 | King  |  50000 | President |  10 | Development | Hyderabad |
+| 102 | Scott |  35000 | Manager   |  10 | Development | Hyderabad |
+| 103 | Ford  |  30000 | Manager   |  30 | Operation   | Mumbai    |
+| 104 | Smith |  25000 | Developer |  10 | Development | Hyderabad |
+| 105 | Tom   |  24000 | Developer |  10 | Development | Hyderabad |
+| 106 | Adam  |  22000 | Tester    |  20 | Testing     | Chennai   |
+| 107 | Jerry |  21000 | Tester    |  20 | Testing     | Chennai   |
+| 108 | Raju  |  40000 | Analyst   |  40 | Research    | Banglore  |
++-----+-------+--------+-----------+-----+-------------+-----------+
+
+Non-Equi Join
+mysql> select eid,ename,salary,job,d.dno,dname,location from dept d,employee e  where d.dno != e.dno;
+
+
+Cross Join:
+----------------
+
+mysql> select eid,ename,job,d.dno,dname from employee e CROSS JOIN  dept d
+    -> where d.dno = e.dno;
+
+Natural Join:
+----------------
+
+mysql> select eid,ename,job,dno,dname from employee NATURAL JOIN  dept ;
+
+
+
+Left Outer Join:
+----------------------
+mysql> select eid,ename,job,d.dno,dname from employee e left  outer join dept d ON(d.dno = e.dno);
+
+Right Outer Join:
+------------------------
+
+mysql> select eid,ename,job,d.dno,dname from employee e right  outer join dept d ON(d.dno = e.dno);
+
+Full Outer Join:
+--------------------
+
+mysql> select eid,ename,job,d.dno,dname from employee e left  outer join dept d ON(d.dno = e.dno) UNION
+    -> select eid,ename,job,d.dno,dname from employee e right  outer join dept d ON(d.dno = e.dno);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

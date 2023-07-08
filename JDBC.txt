@@ -1,0 +1,47 @@
+
+java.sql    package
+
+Interfaces:
+--------------
+Driver
+Connection
+Statement
+PreparedStatement
+CallableStatement
+ResultSet
+
+Classes:
+--------------
+DriverManager
+Date
+
+
+
+JDBC Implementation Steps:
+----------------------------------------
+step1:   Register Driver class 
+
+step2:   Get the DB  connection
+
+step3:  Create Statement  
+
+step4: Write sql query and execute
+Note:  Call executeQuery() for select queries and executeUpdate() for non-select (DML).
+
+step5: close the database connection.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
