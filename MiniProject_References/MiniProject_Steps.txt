@@ -1,0 +1,88 @@
+About Project:
+
+PMS: Products Management System/App
+
+
+step1: Create Database and table with or without records
+
+step2: In Java project create packages
+
+com.pms.pojo
+class Product {
+
+private int pid;
+private String productName;
+private double price;
+private Date  dom;
+
+// constructors , setter & getters etc
+
+}
+
+step3: Create Service Layer
+public interface  IProductService{
+
+
+	// declare all service methods
+
+
+}
+
+public class ProductServiceImp  implements IProductService{
+
+
+	// implement all interface methods
+
+	// also write input validations logics in seperate methods
+
+	// call all the crud operation from DAO class
+
+
+}
+
+step4: Create DAO Layer and also DBUtil class
+
+public class  ProductDAO {
+
+
+	// write all methods same as service class with complete JDBC Logics
+	// all CRUD Operation in JDBC should be implemented here
+
+
+}
+
+class DBUtil{
+
+
+	// method to get DB Connection
+	// method to close DB Connection
+
+}
+
+
+step5: create client class or Main class with main() method
+public class  Client{
+
+
+public static void main(String ar[]){
+
+	// while loop with menu
+	// switch cases
+	// reading data from keyboard
+	// call service class validate methods
+	// call service class CRUD operation add,update,delete,select in cases.
+
+
+
+
+}
+
+}
+
+step6: Create User Defined Exception like below and use it for delete and select one operation
+class  ProductNotFoundException {
+
+
+
+}
+
